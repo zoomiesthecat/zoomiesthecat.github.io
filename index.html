@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZOOMIES — the market has the zoomies</title>
+<meta name="description" content="ZOOMIES: a cat that inexplicably sprints at full speed at 3am. Dead calm or maximum velocity, no in-between. Pre-launch — the token does not exist yet.">
+<meta property="og:title" content="ZOOMIES — the market has the zoomies">
+<meta property="og:description" content="A cat that inexplicably sprints at full speed at 3am. Pre-launch: the token does not exist yet — anyone selling you $ZOOMIES today is scamming you.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23E8542F'/%3E%3Ccircle cx='50' cy='52' r='42' fill='%23F4E9D3'/%3E%3Cpath d='M28 40 L37 18 L48 37 Z' fill='%23231F1D'/%3E%3Cpath d='M72 40 L63 18 L52 37 Z' fill='%23231F1D'/%3E%3Ccircle cx='50' cy='60' r='27' fill='%23231F1D'/%3E%3Ccircle cx='41' cy='56' r='7' fill='%23FFFBF2'/%3E%3Ccircle cx='59' cy='56' r='7' fill='%23FFFBF2'/%3E%3Ccircle cx='41' cy='57' r='5' fill='%23231F1D'/%3E%3Ccircle cx='59' cy='57' r='5' fill='%23231F1D'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink:#231F1D;
+    --paper:#F4E9D3;
+    --milk:#FFFBF2;
+    --signal:#E8542F;
+    --night:#22304A;
+    --night-deep:#1B2740;
+    --toast:#E3D2AC;
+    --toast-line:#DCC9A2;
+    --mono:"Courier New", Courier, "Nimbus Mono PS", monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--mono);
+    font-size:17px;
+    line-height:1.55;
+    /* faint print-paper grain: hairline registration grid */
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 119px, rgba(220,201,162,.35) 119px 120px),
+      repeating-linear-gradient(90deg, transparent 0 119px, rgba(220,201,162,.35) 119px 120px);
+  }
+  a{color:inherit}
+  img,svg{display:block;max-width:100%}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* ---------- ticker ---------- */
+  .ticker{
+    background:var(--ink);
+    color:var(--milk);
+    overflow:hidden;
+    border-bottom:3px solid var(--signal);
+    font-size:14px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    padding:9px 0;
+    white-space:nowrap;
+  }
+  .ticker__track{display:inline-block;white-space:nowrap;padding-left:0}
+  .ticker__track b{color:var(--signal);font-weight:normal;padding:0 14px}
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:var(--night);
+    color:var(--milk);
+    border-bottom:6px solid var(--ink);
+    position:relative;
+    overflow:hidden;
+  }
+  .hero__inner{max-width:1080px;margin:0 auto;padding:56px 20px 0}
+  .hero__badge{
+    display:inline-block;
+    border:2px solid var(--paper);
+    color:var(--paper);
+    font-size:13px;
+    letter-spacing:4px;
+    padding:6px 14px;
+    text-decoration:none;
+  }
+  .hero__badge:hover{background:var(--paper);color:var(--night)}
+  .hero__wordmark{margin:34px auto 0;max-width:620px}
+  .hero__tagline{
+    text-align:center;
+    font-size:clamp(24px,4.6vw,44px);
+    font-weight:bold;
+    letter-spacing:1px;
+    margin:26px auto 0;
+    max-width:820px;
+  }
+  .hero__tagline em{font-style:normal;color:var(--signal)}
+  .hero__sub{
+    text-align:center;
+    color:var(--paper);
+    max-width:560px;
+    margin:18px auto 0;
+    font-size:15.5px;
+  }
+  .hero__cta{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+    margin:30px auto 8px;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:15px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:13px 26px;
+    border:3px solid var(--milk);
+    color:var(--milk);
+    background:transparent;
+  }
+  .btn--solid{background:var(--signal);border-color:var(--signal);color:var(--milk)}
+  .btn--solid:hover{background:var(--milk);color:var(--signal)}
+  .btn:hover{background:var(--milk);color:var(--night)}
+  /* the SVG's ground band occupies the bottom 9.64% of its height;
+     this gradient extends the band full-bleed across the section */
+  .hero__art{
+    margin-top:8px;
+    background:linear-gradient(to top, var(--night-deep) 9.64%, transparent 9.64%);
+  }
+  .hero__art svg{max-width:1080px;margin:0 auto}
+  .hero__est{
+    background:var(--night-deep);
+    text-align:center;
+    color:var(--toast-line);
+    letter-spacing:6px;
+    font-size:13px;
+    margin:0;
+    padding:10px 20px 24px;
+  }
+
+  /* ---------- sheet sections ---------- */
+  .sheet{max-width:1080px;margin:64px auto;padding:0 20px}
+  .sheet__head{
+    display:flex;
+    align-items:baseline;
+    gap:18px;
+    border-bottom:3px solid var(--ink);
+    padding-bottom:10px;
+    margin-bottom:10px;
+    flex-wrap:wrap;
+  }
+  .sheet__no{
+    background:var(--ink);
+    color:var(--paper);
+    padding:2px 10px;
+    font-size:14px;
+    letter-spacing:2px;
+  }
+  .sheet__title{
+    font-size:clamp(22px,3.4vw,32px);
+    letter-spacing:6px;
+    text-transform:uppercase;
+    font-weight:bold;
+  }
+  .sheet__note{color:#8A7A5C;font-size:14px;letter-spacing:2px;margin-left:auto}
+
+  /* ---------- lore panels ---------- */
+  .cycle{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:0;
+    border:3px solid var(--ink);
+    background:var(--paper);
+  }
+  .beat{
+    border-right:2px dashed var(--toast-line);
+    padding:22px 18px 26px;
+    display:flex;
+    flex-direction:column;
+  }
+  .beat:last-child{border-right:none}
+  .beat__num{
+    font-size:13px;
+    letter-spacing:3px;
+    color:var(--signal);
+    margin-bottom:6px;
+  }
+  .beat__art{margin:6px 0 14px;min-height:150px;display:flex;align-items:flex-end}
+  .beat__art svg{width:100%;height:auto}
+  .beat__name{
+    font-size:22px;
+    font-weight:bold;
+    letter-spacing:6px;
+    margin-bottom:2px;
+  }
+  .beat__speed{font-size:13px;letter-spacing:2px;color:#8A7A5C;margin-bottom:12px}
+  .beat__text{font-size:15px}
+  .cycle-footnote{
+    border:3px solid var(--ink);
+    border-top:none;
+    background:var(--ink);
+    color:var(--paper);
+    padding:14px 18px;
+    font-size:15px;
+    letter-spacing:1px;
+  }
+  .cycle-footnote b{color:var(--signal);font-weight:normal}
+
+  /* ---------- facts ---------- */
+  .scam-warning{
+    border:4px solid var(--signal);
+    background:var(--milk);
+    padding:24px 22px;
+    margin:22px 0 26px;
+    position:relative;
+  }
+  .scam-warning::before{
+    content:"⚠ READ FIRST";
+    position:absolute;
+    top:-14px;
+    left:16px;
+    background:var(--signal);
+    color:var(--milk);
+    font-size:13px;
+    letter-spacing:3px;
+    padding:3px 12px;
+  }
+  .scam-warning p{font-size:clamp(17px,2.4vw,21px);font-weight:bold;line-height:1.5}
+  .scam-warning p+p{margin-top:10px;font-weight:normal;font-size:15.5px}
+  .scam-warning .no-token{color:var(--signal)}
+  .facts{border:3px solid var(--ink)}
+  .fact{
+    display:grid;
+    grid-template-columns:190px 1fr;
+    border-bottom:2px dashed var(--toast-line);
+  }
+  .fact:last-child{border-bottom:none}
+  .fact dt{
+    background:var(--toast);
+    padding:16px 14px;
+    font-weight:bold;
+    letter-spacing:2px;
+    font-size:14px;
+    text-transform:uppercase;
+    border-right:3px solid var(--ink);
+  }
+  .fact dd{padding:16px 18px;font-size:15.5px}
+  .fact dd b{color:var(--signal);font-weight:bold}
+
+  /* ---------- disclosure ---------- */
+  .disclosure{
+    border:3px solid var(--ink);
+    background:var(--toast);
+    padding:26px 22px;
+  }
+  .disclosure h3{
+    font-size:19px;
+    letter-spacing:5px;
+    margin-bottom:12px;
+    text-transform:uppercase;
+  }
+  .disclosure p{font-size:16px;max-width:70ch}
+  .disclosure p+p{margin-top:10px}
+
+  /* ---------- footer ---------- */
+  footer{
+    background:var(--ink);
+    color:var(--paper);
+    border-top:6px solid var(--signal);
+    margin-top:72px;
+  }
+  .foot__inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:42px 20px 46px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:26px;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .foot__links a{
+    color:var(--milk);
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:15px;
+    text-decoration:none;
+    border:2px solid var(--milk);
+    padding:11px 20px;
+    display:inline-block;
+  }
+  .foot__links a:hover{background:var(--signal);border-color:var(--signal)}
+  .foot__fake{font-size:14px;color:var(--toast-line);max-width:420px}
+  .foot__fake b{color:var(--signal);font-weight:normal}
+  .foot__legal{
+    border-top:1px solid #3a4a68;
+    text-align:center;
+    font-size:12.5px;
+    letter-spacing:2px;
+    color:#8A7A5C;
+    padding:14px 20px 18px;
+  }
+
+  @media (max-width:560px){
+    .fact{grid-template-columns:1fr}
+    .fact dt{border-right:none;border-bottom:2px solid var(--ink);padding:10px 14px}
+    .beat{border-right:none;border-bottom:2px dashed var(--toast-line)}
+    .beat:last-child{border-bottom:none}
+  }
+
+  /* ---------- motion (only if user allows) ---------- */
+  @media (prefers-reduced-motion: no-preference){
+    .ticker__track{animation:ticker 26s linear infinite}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    .spin{transform-box:fill-box;transform-origin:center;animation:spin .45s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .streak{stroke-dasharray:52 44;animation:streak .5s linear infinite}
+    @keyframes streak{to{stroke-dashoffset:-96}}
+
+    .twinkle{animation:twinkle 2.6s ease-in-out infinite}
+    .twinkle:nth-child(2n){animation-delay:.9s}
+    .twinkle:nth-child(3n){animation-delay:1.7s;animation-duration:3.4s}
+    @keyframes twinkle{0%,100%{opacity:1}50%{opacity:.25}}
+
+    .wiggle{transform-box:fill-box;transform-origin:50% 95%;animation:wiggle .35s ease-in-out infinite alternate}
+    @keyframes wiggle{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
+
+    .twitch{transform-box:fill-box;transform-origin:50% 100%;animation:twitch 1.8s ease-in-out infinite}
+    @keyframes twitch{0%,72%,100%{transform:rotate(0)}78%{transform:rotate(-7deg)}84%{transform:rotate(5deg)}90%{transform:rotate(-3deg)}}
+
+    .breathe{transform-box:fill-box;transform-origin:50% 100%;animation:breathe 4s ease-in-out infinite}
+    @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.015)}}
+
+    .hero__badge,.hero__wordmark,.hero__tagline,.hero__sub,.hero__cta{
+      animation:rise .7s cubic-bezier(.2,.8,.3,1) both;
+    }
+    .hero__wordmark{animation-delay:.08s}
+    .hero__tagline{animation-delay:.18s}
+    .hero__sub{animation-delay:.28s}
+    .hero__cta{animation-delay:.38s}
+    @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+    .hero__art svg{animation:runin 1s cubic-bezier(.16,.9,.28,1) both;animation-delay:.15s}
+    @keyframes runin{from{opacity:0;transform:translateX(-70px)}to{opacity:1;transform:none}}
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================================================================
+     Canon art defs — copied verbatim from art/rubberhose/model-sheet.svg
+     (#ear #head #face-* #mitt #sock #tail #wheel) + banner wordmark.
+     Referenced by every inline drawing below; never redrawn freehand.
+====================================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="ear">
+      <path d="M 26 -78 L 60 -158 L 96 -84 Q 60 -64 34 -66 Z" fill="#231F1D"/>
+      <path d="M 46 -90 L 61 -134 L 80 -90 Q 62 -76 50 -80 Z" fill="#E8542F"/>
+    </g>
+    <g id="head">
+      <use href="#ear"/>
+      <use href="#ear" transform="scale(-1,1)"/>
+      <circle r="92" fill="#231F1D"/>
+      <path d="M -54 26 Q 0 8 54 26 Q 68 76 0 86 Q -68 76 -54 26 Z" fill="#FFFBF2"/>
+      <path d="M -10 32 Q 0 26 10 32 Q 6 44 0 46 Q -6 44 -10 32 Z" fill="#E8542F"/>
+      <g stroke="#FFFBF2" stroke-width="6" stroke-linecap="round" fill="none">
+        <path d="M 60 38 Q 100 30 128 36"/>
+        <path d="M 58 54 Q 98 56 124 66"/>
+        <path d="M -60 38 Q -100 30 -128 36"/>
+        <path d="M -58 54 Q -98 56 -124 66"/>
+      </g>
+    </g>
+    <g id="face-loaf">
+      <g>
+        <ellipse cx="-36" cy="-12" rx="19" ry="14" fill="#FFFBF2"/>
+        <ellipse cx="36" cy="-12" rx="19" ry="14" fill="#FFFBF2"/>
+        <path d="M -57 -14 Q -36 -34 -15 -14 L -15 -26 L -57 -26 Z" fill="#231F1D"/>
+        <path d="M 15 -14 Q 36 -34 57 -14 L 57 -26 L 15 -26 Z" fill="#231F1D"/>
+        <rect x="-57" y="-30" width="42" height="14" fill="#231F1D"/>
+        <rect x="15" y="-30" width="42" height="14" fill="#231F1D"/>
+        <circle cx="-36" cy="-5" r="6" fill="#231F1D"/>
+        <circle cx="36" cy="-5" r="6" fill="#231F1D"/>
+      </g>
+      <path d="M -12 54 Q -6 60 0 54 Q 6 60 12 54" stroke="#231F1D" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+    </g>
+    <g id="face-windup">
+      <circle cx="-37" cy="-16" r="29" fill="#FFFBF2"/>
+      <circle cx="37" cy="-16" r="29" fill="#FFFBF2"/>
+      <circle cx="-37" cy="-14" r="22" fill="#231F1D"/>
+      <circle cx="37" cy="-14" r="22" fill="#231F1D"/>
+      <circle cx="-30" cy="-22" r="6" fill="#FFFBF2"/>
+      <circle cx="44" cy="-22" r="6" fill="#FFFBF2"/>
+      <circle cx="0" cy="56" r="4.5" fill="#231F1D"/>
+    </g>
+    <g id="face-sprint">
+      <path d="M -58 -24 L -14 -14 L -16 4 L -54 -4 Z" fill="#FFFBF2"/>
+      <path d="M 12 -12 L 56 -20 L 58 0 L 14 6 Z" fill="#FFFBF2"/>
+      <path d="M -26 -12 L -14 -14 L -16 4 L -28 1 Z" fill="#231F1D"/>
+      <path d="M 44 -19 L 56 -20 L 58 0 L 46 1 Z" fill="#231F1D"/>
+      <path d="M -26 42 Q 0 84 26 42 Q 0 56 -26 42 Z" fill="#231F1D"/>
+      <ellipse cx="2" cy="60" rx="11" ry="7" fill="#E8542F"/>
+    </g>
+    <g id="face-collapse">
+      <g stroke="#FFFBF2" stroke-width="8" stroke-linecap="round" fill="none">
+        <path d="M -50 -26 L -22 2"/>
+        <path d="M -22 -26 L -50 2"/>
+        <path d="M 22 -26 L 50 2"/>
+        <path d="M 50 -26 L 22 2"/>
+      </g>
+      <path d="M -14 52 Q -8 56 -2 52 L 2 78 Q 4 92 14 90 Q 24 88 18 72 L 12 52 Q 0 58 -14 52 Z" fill="#E8542F"/>
+      <path d="M 8 62 L 12 78" stroke="#B93C1D" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </g>
+    <g id="mitt">
+      <circle r="15" fill="#FFFBF2" stroke="#231F1D" stroke-width="5"/>
+      <path d="M -15 -4 Q 0 4 15 -4" stroke="#231F1D" stroke-width="4" fill="none"/>
+    </g>
+    <g id="sock">
+      <ellipse rx="21" ry="12" fill="#FFFBF2" stroke="#231F1D" stroke-width="5"/>
+    </g>
+    <g id="tail">
+      <path d="M 0 0 L 18 -40 L -6 -70 L 16 -110" stroke="#231F1D" stroke-width="17" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 0 0 L 18 -40 L -6 -70 L 16 -110" stroke="#E8542F" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 4 -106 L 30 -110 L 12 -132 Z" fill="#231F1D"/>
+    </g>
+    <!-- wheel, ink stroke (day/cream backgrounds) -->
+    <g id="wheel">
+      <circle r="46" fill="none" stroke="#231F1D" stroke-width="11" stroke-dasharray="34 24" stroke-linecap="round"/>
+      <use href="#sock" transform="translate(38,26) rotate(35)"/>
+      <use href="#sock" transform="translate(-34,-30) rotate(35)"/>
+    </g>
+    <!-- wheel, milk stroke (3AM Blue night backgrounds, per banner.svg) -->
+    <g id="wheel-night">
+      <circle r="46" fill="none" stroke="#FFFBF2" stroke-width="11" stroke-dasharray="34 24" stroke-linecap="round"/>
+      <use href="#sock" transform="translate(38,26) rotate(35)"/>
+      <use href="#sock" transform="translate(-34,-30) rotate(35)"/>
+    </g>
+    <!-- hand-stroked wordmark skeletons (banner.svg) -->
+    <g id="wordmark" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 0 0 H 80 L 0 150 H 80"/>
+      <path transform="translate(105,0)" d="M 40 3 C 12 3 2 36 2 75 C 2 114 12 147 40 147 C 68 147 78 114 78 75 C 78 36 68 3 40 3 Z"/>
+      <path transform="translate(210,0)" d="M 40 3 C 12 3 2 36 2 75 C 2 114 12 147 40 147 C 68 147 78 114 78 75 C 78 36 68 3 40 3 Z"/>
+      <path transform="translate(315,0)" d="M 0 150 V 0 L 40 85 L 80 0 V 150"/>
+      <path transform="translate(412,0)" d="M 30 0 V 150"/>
+      <path transform="translate(478,0)" d="M 78 0 H 0 V 150 H 78 M 0 73 H 52"/>
+      <path transform="translate(583,0)" d="M 70 20 C 56 -6 20 -4 12 28 C 5 56 30 66 42 72 C 58 80 76 94 68 120 C 58 150 20 150 8 124"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- ============================ ticker ============================ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker__track">
+    <span>the market has the zoomies <b>·</b> nothing for hours <b>·</b> everything at once <b>·</b> no reason <b>·</b> est. 3:00 am <b>·</b> one cat, two speeds <b>·</b> </span><span>the market has the zoomies <b>·</b> nothing for hours <b>·</b> everything at once <b>·</b> no reason <b>·</b> est. 3:00 am <b>·</b> one cat, two speeds <b>·</b> </span>
+  </div>
+</div>
+
+<!-- ============================ hero ============================ -->
+<header class="hero">
+  <div class="hero__inner">
+    <div style="text-align:center">
+      <a class="hero__badge" href="#facts">PRE-LAUNCH · NO TOKEN YET · READ WHY ↓</a>
+    </div>
+
+    <div class="hero__wordmark" role="img" aria-label="ZOOMIES">
+      <svg viewBox="-34 -8 736 176">
+        <g transform="skewX(-8)">
+          <use href="#wordmark" transform="translate(8,8)" stroke="#E8542F" stroke-width="27"/>
+          <use href="#wordmark" stroke="#FFFBF2" stroke-width="27"/>
+        </g>
+      </svg>
+    </div>
+
+    <h1 class="hero__tagline">the market has <em>the&nbsp;zoomies</em>.</h1>
+    <p class="hero__sub">nothing happens for hours. then everything happens at once. for no reason. we know a cat like that.</p>
+
+    <nav class="hero__cta" aria-label="Primary">
+      <a class="btn btn--solid" href="https://x.com/zoomiesthecat" rel="me noopener" target="_blank">follow the cat on&nbsp;X</a>
+      <a class="btn" href="#cycle">the lore ↓</a>
+    </nav>
+  </div>
+
+  <!-- 3AM sprint: clock-moon pulled BEHIND the cat so the ink body punches out -->
+  <div class="hero__art" role="img" aria-label="ZOOMIES, an ink-black rubber-hose cartoon cat, sprinting at full speed across a cream clock-moon stuck at 3:00, under a 3AM blue night sky">
+    <svg viewBox="0 0 1200 560">
+      <!-- sky twinkles -->
+      <g fill="#FFFBF2">
+        <path class="twinkle" d="M 130 90 l 4 11 11 4 -11 4 -4 11 -4 -11 -11 -4 11 -4 Z"/>
+        <path class="twinkle" d="M 1040 66 l 3 9 9 3 -9 3 -3 9 -3 -9 -9 -3 9 -3 Z"/>
+        <path class="twinkle" d="M 1130 300 l 4 11 11 4 -11 4 -4 11 -4 -11 -11 -4 11 -4 Z"/>
+        <path class="twinkle" d="M 70 340 l 3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z"/>
+        <circle class="twinkle" cx="960" cy="150" r="4"/>
+        <circle class="twinkle" cx="300" cy="60" r="3"/>
+        <circle class="twinkle" cx="210" cy="440" r="3"/>
+      </g>
+      <!-- ground band -->
+      <rect y="506" width="1200" height="54" fill="#1B2740"/>
+      <!-- clock-moon stuck at 3:00, behind the cat -->
+      <g transform="translate(620,300)">
+        <circle r="200" fill="#F4E9D3"/>
+        <g fill="#231F1D">
+          <circle cy="-163" r="12"/>
+          <circle cx="163" r="12"/>
+          <circle cy="163" r="12"/>
+          <circle cx="-163" r="12"/>
+        </g>
+        <path d="M 0 0 V -128" stroke="#231F1D" stroke-width="14" stroke-linecap="round"/>
+        <path d="M 0 0 H 96" stroke="#231F1D" stroke-width="17" stroke-linecap="round"/>
+        <circle r="15" fill="#E8542F"/>
+      </g>
+      <!-- ZOOMIES at full sprint (model-sheet pose 3) -->
+      <g transform="translate(330,90)">
+        <g class="streak" stroke="#E8542F" stroke-width="9" stroke-linecap="round">
+          <line x1="30" y1="248" x2="150" y2="248"/>
+          <line x1="58" y1="330" x2="148" y2="330"/>
+          <line x1="66" y1="372" x2="160" y2="372"/>
+        </g>
+        <line class="streak" x1="24" y1="416" x2="132" y2="416" stroke="#E8542F" stroke-width="9" stroke-linecap="round"/>
+        <use href="#tail" transform="translate(150,290) rotate(-96)"/>
+        <path d="M 352 246 Q 220 226 132 268 Q 106 286 132 314 Q 240 356 356 340 Z" fill="#231F1D"/>
+        <g transform="translate(256,388)"><use class="spin" href="#wheel-night"/></g>
+        <path d="M 420 318 L 528 306" stroke="#231F1D" stroke-width="18" stroke-linecap="round"/>
+        <path d="M 410 344 L 512 350" stroke="#231F1D" stroke-width="18" stroke-linecap="round"/>
+        <use href="#mitt" transform="translate(539,305)"/>
+        <use href="#mitt" transform="translate(524,351)"/>
+        <g transform="translate(404,292)">
+          <use href="#head"/>
+          <use href="#face-sprint"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <p class="hero__est">EST. 3:00 AM · EVERY NIGHT · NO EXCEPTIONS</p>
+</header>
+
+<!-- ============================ lore ============================ -->
+<main>
+<section class="sheet" id="cycle" aria-labelledby="cycle-title">
+  <div class="sheet__head">
+    <span class="sheet__no">SHEET 01</span>
+    <h2 class="sheet__title" id="cycle-title">The Cycle</h2>
+    <span class="sheet__note">one cat · two speeds · zero in-between</span>
+  </div>
+
+  <div class="cycle">
+    <!-- 1 LOAF -->
+    <article class="beat">
+      <p class="beat__num">FIG. 1</p>
+      <div class="beat__art" role="img" aria-label="ZOOMIES in loaf mode: a bread-shaped black cat, eyes half closed, completely still">
+        <svg viewBox="95 285 500 305">
+          <g class="breathe">
+            <ellipse cx="288" cy="562" rx="175" ry="16" fill="#E3D2AC"/>
+            <use href="#tail" transform="translate(455,548) rotate(93) scale(0.95)"/>
+            <path d="M 132 545 C 128 458 182 414 292 412 C 402 414 450 460 446 545 Q 446 560 424 560 L 154 560 Q 132 560 132 545 Z" fill="#231F1D"/>
+            <g transform="translate(232,462)">
+              <use href="#head"/>
+              <use href="#face-loaf"/>
+            </g>
+            <ellipse cx="205" cy="556" rx="16" ry="8" fill="#FFFBF2"/>
+            <ellipse cx="278" cy="558" rx="16" ry="8" fill="#FFFBF2"/>
+          </g>
+        </svg>
+      </div>
+      <h3 class="beat__name">LOAF</h3>
+      <p class="beat__speed">dead calm · 0 mph</p>
+      <p class="beat__text">has not moved in six hours. will not move for six more. do not mistake this for peace. it is a scheduled event.</p>
+    </article>
+
+    <!-- 2 WIND-UP -->
+    <article class="beat">
+      <p class="beat__num">FIG. 2</p>
+      <div class="beat__art" role="img" aria-label="ZOOMIES winding up: butt raised, tail bolt vertical, pupils fully dilated">
+        <svg viewBox="35 170 490 450">
+          <ellipse cx="290" cy="588" rx="185" ry="15" fill="#E3D2AC"/>
+          <g class="wiggle">
+            <use href="#tail" transform="translate(372,336) rotate(-12) scale(1.05)"/>
+            <g stroke="#E8542F" stroke-width="6" fill="none" stroke-linecap="round">
+              <path d="M 462 368 Q 484 420 462 472"/>
+              <path d="M 486 380 Q 504 420 486 460"/>
+            </g>
+            <circle cx="362" cy="416" r="80" fill="#231F1D"/>
+            <path d="M 330 372 Q 226 396 178 500 Q 210 534 262 522 Q 300 462 372 466 Z" fill="#231F1D"/>
+            <path d="M 200 512 L 190 578" stroke="#231F1D" stroke-width="20" stroke-linecap="round"/>
+            <path d="M 244 520 L 246 578" stroke="#231F1D" stroke-width="20" stroke-linecap="round"/>
+            <use href="#mitt" transform="translate(188,585)"/>
+            <use href="#mitt" transform="translate(248,585)"/>
+            <path d="M 330 480 L 322 570" stroke="#231F1D" stroke-width="22" stroke-linecap="round"/>
+            <path d="M 402 484 L 408 570" stroke="#231F1D" stroke-width="22" stroke-linecap="round"/>
+            <use href="#sock" transform="translate(322,582)"/>
+            <use href="#sock" transform="translate(410,582)"/>
+            <g transform="translate(180,462)">
+              <use href="#head"/>
+              <use href="#face-windup"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <h3 class="beat__name">WIND-UP</h3>
+      <p class="beat__speed">butt wiggle · pupils at maximum</p>
+      <p class="beat__text">3:00 am. pupils fully dilated. rump oscillating at a frequency science can't explain. nothing has changed. it's happening anyway.</p>
+    </article>
+
+    <!-- 3 ZOOMIES -->
+    <article class="beat">
+      <p class="beat__num">FIG. 3</p>
+      <div class="beat__art" role="img" aria-label="ZOOMIES at full sprint: body stretched horizontal, legs a blurred wheel, tail bolt streaming behind">
+        <svg viewBox="0 115 575 355">
+          <g class="streak" stroke="#231F1D" stroke-width="9" stroke-linecap="round">
+            <line x1="30" y1="248" x2="150" y2="248"/>
+            <line x1="58" y1="330" x2="148" y2="330"/>
+            <line x1="24" y1="416" x2="132" y2="416"/>
+          </g>
+          <line class="streak" x1="66" y1="372" x2="160" y2="372" stroke="#E8542F" stroke-width="9" stroke-linecap="round"/>
+          <use href="#tail" transform="translate(150,290) rotate(-96)"/>
+          <path d="M 352 246 Q 220 226 132 268 Q 106 286 132 314 Q 240 356 356 340 Z" fill="#231F1D"/>
+          <g transform="translate(256,388)"><use class="spin" href="#wheel"/></g>
+          <path d="M 420 318 L 528 306" stroke="#231F1D" stroke-width="18" stroke-linecap="round"/>
+          <path d="M 410 344 L 512 350" stroke="#231F1D" stroke-width="18" stroke-linecap="round"/>
+          <use href="#mitt" transform="translate(539,305)"/>
+          <use href="#mitt" transform="translate(524,351)"/>
+          <ellipse cx="140" cy="432" rx="22" ry="14" fill="none" stroke="#DCC9A2" stroke-width="6"/>
+          <ellipse cx="94" cy="446" rx="14" ry="9" fill="none" stroke="#DCC9A2" stroke-width="5"/>
+          <g transform="translate(404,292)">
+            <use href="#head"/>
+            <use href="#face-sprint"/>
+          </g>
+        </svg>
+      </div>
+      <h3 class="beat__name">ZOOMIES</h3>
+      <p class="beat__speed">full sprint · 3:00 am sharp</p>
+      <p class="beat__text">maximum velocity. no destination. no reason. every hallway a racetrack, every wall a launchpad. this is the part everyone screenshots.</p>
+    </article>
+
+    <!-- 4 COLLAPSE -->
+    <article class="beat">
+      <p class="beat__num">FIG. 4</p>
+      <div class="beat__art" role="img" aria-label="ZOOMIES collapsed flat like a pancake, tongue out, one hind leg still sticking straight up and twitching">
+        <svg viewBox="25 250 560 355">
+          <use href="#tail" transform="translate(452,566) rotate(90) scale(0.8)"/>
+          <path d="M 108 552 Q 110 512 178 510 L 412 512 Q 466 512 468 548 Q 468 576 424 576 L 146 576 Q 106 574 108 552 Z" fill="#231F1D"/>
+          <path d="M 148 556 L 66 566" stroke="#231F1D" stroke-width="16" stroke-linecap="round"/>
+          <use href="#mitt" transform="translate(56,568) scale(0.9)"/>
+          <path d="M 432 554 L 512 562" stroke="#231F1D" stroke-width="16" stroke-linecap="round"/>
+          <use href="#sock" transform="translate(520,563) scale(0.85)"/>
+          <g class="twitch">
+            <path d="M 396 514 Q 402 470 414 452" stroke="#231F1D" stroke-width="17" stroke-linecap="round" fill="none"/>
+            <use href="#sock" transform="translate(417,444) rotate(-20) scale(0.9)"/>
+            <g stroke="#E8542F" stroke-width="4" stroke-linecap="round" fill="none">
+              <path d="M 442 432 Q 450 440 444 450"/>
+              <path d="M 452 456 Q 460 462 454 472"/>
+            </g>
+          </g>
+          <g transform="translate(196,478) rotate(-10)">
+            <use href="#head"/>
+            <use href="#face-collapse"/>
+          </g>
+          <g fill="#E8542F">
+            <path class="twinkle" d="M 52 344 l 5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5 Z"/>
+            <path class="twinkle" d="M 108 268 l 4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 Z"/>
+          </g>
+        </svg>
+      </div>
+      <h3 class="beat__name">COLLAPSE</h3>
+      <p class="beat__speed">post-zoomies flop · do not disturb</p>
+      <p class="beat__text">over as suddenly as it began. flat on the floor, one leg still going. no lessons learned. see you tomorrow at 3.</p>
+    </article>
+  </div>
+  <p class="cycle-footnote">sound familiar? charts do this too. sideways for hours, then everything at once, for no reason. <b>that's the whole bit.</b> there is no middle gear.</p>
+</section>
+
+<!-- ============================ facts ============================ -->
+<section class="sheet" id="facts" aria-labelledby="facts-title">
+  <div class="sheet__head">
+    <span class="sheet__no">SHEET 02</span>
+    <h2 class="sheet__title" id="facts-title">Fair-Launch Facts</h2>
+    <span class="sheet__note">the boring part, in writing</span>
+  </div>
+
+  <div class="scam-warning">
+    <p><span class="no-token">The token does not exist yet.</span> $ZOOMIES has not launched. There is no contract address. <span class="no-token">Anyone selling you $ZOOMIES today is scamming you.</span></p>
+    <p>Right now we are just posting a cat. When (and only when) the token launches, the contract address will be announced on our X account and nowhere else. Until then, every "$ZOOMIES" you see is someone squatting on the name.</p>
+  </div>
+
+  <dl class="facts">
+    <div class="fact">
+      <dt>Launch</dt>
+      <dd>pump.fun fair launch. Everyone buys on the same public bonding curve, at the same time, including us. No whitelist, no head start.</dd>
+    </div>
+    <div class="fact">
+      <dt>Presale</dt>
+      <dd><b>None.</b> No team allocation. No bundled or sniped buys. Zero tokens exist before the public curve does.</dd>
+    </div>
+    <div class="fact">
+      <dt>Dev wallet</dt>
+      <dd>Tiny dev buy from a <b>publicly disclosed wallet</b>. You will be able to see every coin we hold, forever.</dd>
+    </div>
+    <div class="fact">
+      <dt>Liquidity</dt>
+      <dd>LP is <b>burned automatically</b> when the curve graduates to Raydium. Nobody can pull it — not even us.</dd>
+    </div>
+    <div class="fact">
+      <dt>Receipts</dt>
+      <dd>Launch transaction, dev holdings, and an "is this a rug?" answer, pinned on day one. Ask us the hard questions in public.</dd>
+    </div>
+  </dl>
+</section>
+
+<!-- ============================ disclosure ============================ -->
+<section class="sheet" aria-labelledby="disclosure-title">
+  <div class="sheet__head">
+    <span class="sheet__no">SHEET 03</span>
+    <h2 class="sheet__title" id="disclosure-title">Read This Twice</h2>
+    <span class="sheet__note">not fine print. actual print.</span>
+  </div>
+  <div class="disclosure">
+    <h3>ZOOMIES is a memecoin.</h3>
+    <p>It has no utility, no product, and no roadmap that ends anywhere except a cartoon cat running in circles. Nobody here is promising you anything: no returns, no guarantees, no numbers. The price of any memecoin can go to zero and stay there.</p>
+    <p>This page is not financial advice. Only ever spend what you would happily set on fire for a cartoon cat.</p>
+  </div>
+</section>
+</main>
+
+<!-- ============================ footer ============================ -->
+<footer>
+  <div class="foot__inner">
+    <div class="foot__links">
+      <a href="https://x.com/zoomiesthecat" rel="me noopener" target="_blank">X — follow the cat</a>
+    </div>
+    <p class="foot__fake">no telegram. no discord. not yet. <b>if you found one, it's fake.</b> new channels will only ever be announced on X first.</p>
+  </div>
+  <p class="foot__legal">ZOOMIES — original character · art &amp; IP owned by the ZOOMIES team · est. 3:00 am · © 2026</p>
+</footer>
+
+</body>
+</html>
