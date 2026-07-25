@@ -4,10 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ZOOMIES · the market has the zoomies</title>
-<meta name="description" content="ZOOMIES: a cat that inexplicably sprints at full speed at 3am. Dead calm or maximum velocity, no in-between. Pre-launch: the token does not exist yet.">
+<meta name="description" content="ZOOMIES: a cat that inexplicably sprints at full speed at 3am. Dead calm or maximum velocity, no in-between. Live on Robinhood Chain.">
 <meta property="og:title" content="ZOOMIES · the market has the zoomies">
-<meta property="og:description" content="A cat that inexplicably sprints at full speed at 3am. Pre-launch: the token does not exist yet. Anyone selling you $ZOOMIES today is scamming you.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23E8542F'/%3E%3Ccircle cx='50' cy='52' r='42' fill='%23F4E9D3'/%3E%3Cpath d='M28 40 L37 18 L48 37 Z' fill='%23231F1D'/%3E%3Cpath d='M72 40 L63 18 L52 37 Z' fill='%23231F1D'/%3E%3Ccircle cx='50' cy='60' r='27' fill='%23231F1D'/%3E%3Ccircle cx='41' cy='56' r='7' fill='%23FFFBF2'/%3E%3Ccircle cx='59' cy='56' r='7' fill='%23FFFBF2'/%3E%3Ccircle cx='41' cy='57' r='5' fill='%23231F1D'/%3E%3Ccircle cx='59' cy='57' r='5' fill='%23231F1D'/%3E%3C/svg%3E">
+<meta property="og:description" content="A cat that inexplicably sprints at full speed at 3am. Live on Robinhood Chain. Check the official contract address before doing anything.">
+<meta property="og:url" content="https://zoomiesthecat.github.io/">
+<meta property="og:image" content="https://zoomiesthecat.github.io/assets/zoomies-token-logo.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zoomiesthecat.github.io/assets/zoomies-token-logo.png">
+<link rel="canonical" href="https://zoomiesthecat.github.io/">
+<link rel="icon" type="image/png" href="/assets/zoomies-token-logo.png">
 <style>
   :root{
     --ink:#231F1D;
@@ -105,7 +110,9 @@
     border:3px solid var(--milk);
     color:var(--milk);
     background:transparent;
+    cursor:pointer;
   }
+  .btn:disabled{cursor:progress;opacity:.72}
   .btn--solid{background:var(--signal);border-color:var(--signal);color:var(--milk)}
   .btn--solid:hover{background:var(--milk);color:var(--signal)}
   .btn:hover{background:var(--milk);color:var(--night)}
@@ -216,6 +223,7 @@
   .scam-warning p{font-size:clamp(17px,2.4vw,21px);font-weight:bold;line-height:1.5}
   .scam-warning p+p{margin-top:10px;font-weight:normal;font-size:15.5px}
   .scam-warning .no-token{color:var(--signal)}
+  .scam-warning a{color:var(--signal);font-weight:900}
   .facts{border:3px solid var(--ink)}
   .fact{
     display:grid;
@@ -288,6 +296,14 @@
     color:#8A7A5C;
     padding:14px 20px 18px;
   }
+  .wallet-status{
+    width:100%;
+    min-height:1.6em;
+    text-align:center;
+    color:var(--paper);
+    font-size:13px;
+    letter-spacing:1px;
+  }
 
   @media (max-width:560px){
     .fact{grid-template-columns:1fr}
@@ -338,7 +354,7 @@
 <body>
 
 <!-- ======================================================================
-     Canon art defs — copied verbatim from art/rubberhose/model-sheet.svg
+     Canon art defs: copied verbatim from art/rubberhose/model-sheet.svg
      (#ear #head #face-* #mitt #sock #tail #wheel) + banner wordmark.
      Referenced by every inline drawing below; never redrawn freehand.
 ====================================================================== -->
@@ -449,7 +465,7 @@
 <header class="hero">
   <div class="hero__inner">
     <div style="text-align:center">
-      <a class="hero__badge" href="#facts">PRE-LAUNCH · NO TOKEN YET · READ WHY ↓</a>
+      <a class="hero__badge" href="#facts">LIVE ON ROBINHOOD CHAIN · VERIFY CA ↓</a>
     </div>
 
     <div class="hero__wordmark" role="img" aria-label="ZOOMIES">
@@ -466,7 +482,10 @@
 
     <nav class="hero__cta" aria-label="Primary">
       <a class="btn btn--solid" href="https://x.com/zoomiesthecat" rel="me noopener" target="_blank">follow the cat on&nbsp;X</a>
+      <button class="btn" id="add-to-metamask" type="button" aria-describedby="wallet-status">add ZOOMIES to MetaMask</button>
+      <a class="btn" href="https://www.geckoterminal.com/robinhood/pools/0x5b5ed5ea70a4d226e1850e0e5ba94eaaf3d9b418" rel="noopener" target="_blank">view live chart ↗</a>
       <a class="btn" href="#cycle">the lore ↓</a>
+      <p class="wallet-status" id="wallet-status" role="status" aria-live="polite"></p>
     </nav>
   </div>
 
@@ -669,6 +688,7 @@
   <div class="scam-warning">
     <p><span class="no-token">$ZOOMIES is live.</span> The only real contract address is:</p>
     <p style="font-family:monospace;font-size:1.05em;word-break:break-all;user-select:all"><code>0xb1f161a45e9f745412e5b10407463fb3fc7e46f9</code></p>
+    <p><a href="https://robinhoodchain.blockscout.com/token/0xb1f161a45e9f745412e5b10407463fb3fc7e46f9" rel="noopener" target="_blank">Blockscout contract</a> · <a href="https://www.geckoterminal.com/robinhood/pools/0x5b5ed5ea70a4d226e1850e0e5ba94eaaf3d9b418" rel="noopener" target="_blank">GeckoTerminal chart</a> · <a href="https://www.ponsfamily.com/launchpad/0xb1f161a45e9f745412e5b10407463fb3fc7e46f9" rel="noopener" target="_blank">Pons launch page</a></p>
     <p>It is an EVM 0x address on Robinhood Chain. If a CA anywhere does not match this one character for character, it is fake. There are already fake ZOOMIES tokens on this chain, so check every character.</p>
     <p>Fair launch on Pons: no presale, no team allocation, liquidity locked automatically at launch in the Pons locker. Dev wallet 0x91593594D85eb7Ed78B1D37Bb825b025d383135d, dev buy 0.030 ETH (about 0.75 SOL), disclosed. That is all of it.</p>
   </div>
@@ -726,6 +746,62 @@
   </div>
   <p class="foot__legal">ZOOMIES · original character · art &amp; IP owned by the ZOOMIES team · est. 3:00 am · © 2026</p>
 </footer>
+
+<script>
+  (() => {
+    const addButton = document.getElementById('add-to-metamask');
+    const status = document.getElementById('wallet-status');
+    const chain = {
+      chainId: '0x1237',
+      chainName: 'Robinhood Chain',
+      nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+      rpcUrls: ['https://rpc.mainnet.chain.robinhood.com'],
+      blockExplorerUrls: ['https://robinhoodchain.blockscout.com']
+    };
+    const token = {
+      address: '0xb1f161a45e9f745412e5b10407463fb3fc7e46f9',
+      symbol: 'ZOOMIES',
+      decimals: 18,
+      image: 'https://zoomiesthecat.github.io/assets/zoomies-token-logo.png'
+    };
+
+    const updateStatus = message => { status.textContent = message; };
+    const setBusy = busy => {
+      addButton.disabled = busy;
+      addButton.textContent = busy ? 'opening MetaMask...' : 'add ZOOMIES to MetaMask';
+    };
+
+    async function ensureRobinhoodChain(provider) {
+      try {
+        await provider.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: chain.chainId }] });
+      } catch (error) {
+        if (error && error.code !== 4902) throw error;
+        await provider.request({ method: 'wallet_addEthereumChain', params: [chain] });
+        await provider.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: chain.chainId }] });
+      }
+    }
+
+    addButton.addEventListener('click', async () => {
+      const provider = window.ethereum;
+      if (!provider || typeof provider.request !== 'function') {
+        updateStatus('MetaMask extension not found. Install or open MetaMask, then try again.');
+        return;
+      }
+
+      setBusy(true);
+      updateStatus('Confirm Robinhood Chain, then confirm ZOOMIES in MetaMask.');
+      try {
+        await ensureRobinhoodChain(provider);
+        const added = await provider.request({ method: 'wallet_watchAsset', params: { type: 'ERC20', options: token } });
+        updateStatus(added ? 'ZOOMIES added to MetaMask.' : 'MetaMask did not add ZOOMIES. You can import the contract address manually.');
+      } catch (error) {
+        updateStatus(error && error.code === 4001 ? 'MetaMask request cancelled.' : 'MetaMask could not complete the request. Try again or import the contract address manually.');
+      } finally {
+        setBusy(false);
+      }
+    });
+  })();
+</script>
 
 </body>
 </html>
