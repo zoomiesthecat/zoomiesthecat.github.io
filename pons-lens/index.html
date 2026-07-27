@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/pons-lens/">
+  <title>Pons Lens by ZOOMIES · Exit Lens</title>
+  <link rel="canonical" href="https://zoomiesthecat.github.io/pons-lens/">
+  <meta name="description" content="Compare the spot-marked value of a supported pons token amount with a fresh, amount-specific WETH exit quote on Robinhood Chain.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zoomiesthecat.github.io/pons-lens/">
+  <meta property="og:site_name" content="Pons Lens by ZOOMIES">
+  <meta property="og:title" content="Pons Lens by ZOOMIES · Exit Lens">
+  <meta property="og:description" content="One token. One amount. A fresh read-only view of spot-marked value, exit quote, and realization gap.">
+  <meta name="theme-color" content="#22304a">
+  <link rel="icon" href="./assets/zoomies-token.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to query</a>
+
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand-link" href="https://zoomiesthecat.github.io/" aria-label="Back to ZOOMIES home">
+        <span class="brand-mark" aria-hidden="true">
+          <img
+            class="brand-media"
+            src="./assets/zoomies-anim.webp"
+            data-animated-src="./assets/zoomies-anim.webp"
+            data-static-src="./assets/zoomies-token.png"
+            data-motion="animated"
+            alt=""
+            width="64"
+            height="64">
+        </span>
+        <span class="brand-copy">
+          <strong>ZOOMIES</strong>
+          <small>Pons Lens</small>
+        </span>
+      </a>
+      <p class="product-name">Exit Lens <span>Robinhood Chain</span></p>
+      <nav class="tool-nav" aria-label="Pons Lens tools"><a aria-current="page" href="./">Exit Lens</a><a href="./fee-ledger.html">Fee Ledger</a><a href="./graduation-autopsy.html">Graduation Autopsy</a></nav>
+      <span class="read-only-chip"><i aria-hidden="true"></i>Read only</span>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Pons Exit Lens · Robinhood Chain</p>
+        <h1 id="page-title">How much WETH can this amount exit for?</h1>
+        <p class="hero-lede">Spot marks paper value. Exit Lens requests a fresh, amount-specific quote from the token’s canonical pons pool.</p>
+        <ul class="proof-list" aria-label="Exit Lens boundaries">
+          <li><span aria-hidden="true"></span> Fresh block data</li>
+          <li><span aria-hidden="true"></span> Canonical pool</li>
+          <li><span aria-hidden="true"></span> No wallet</li>
+        </ul>
+      </div>
+
+      <aside class="query-panel" aria-labelledby="query-title">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Live, read-only quote</p>
+            <h2 id="query-title">Token + amount</h2>
+          </div>
+          <span class="panel-step" aria-hidden="true">01</span>
+        </div>
+
+        <form id="exit-query" method="get" action="./" aria-busy="false">
+          <div class="field">
+            <label for="token">Pons token address</label>
+            <input
+              id="token"
+              name="token"
+              required
+              autocomplete="off"
+              autocapitalize="none"
+              spellcheck="false"
+              inputmode="text"
+              enterkeyhint="next"
+              aria-describedby="token-help query-status"
+              placeholder="0x…">
+            <p id="token-help">Supported current or legacy pons token.</p>
+          </div>
+
+          <div class="field">
+            <label for="amount">Token amount</label>
+            <input
+              id="amount"
+              name="amount"
+              required
+              autocomplete="off"
+              inputmode="decimal"
+              enterkeyhint="go"
+              aria-describedby="amount-help query-status"
+              placeholder="1000000">
+            <p id="amount-help">Human-readable amount, not base units.</p>
+          </div>
+
+          <button class="primary-button" type="submit">
+            <span class="primary-button__label">Read current pool</span>
+            <span aria-hidden="true">→</span>
+          </button>
+          <button
+            class="text-button"
+            type="button"
+            id="use-example"
+            data-token="0xb1f161a45e9f745412e5b10407463fb3fc7e46f9"
+            data-amount="1000000">
+            Use ZOOMIES example
+          </button>
+        </form>
+      </aside>
+    </section>
+
+    <div class="status-row">
+      <p id="query-status" role="status" aria-live="polite" aria-atomic="true">Ready for a token and amount.</p>
+      <button class="copy-button" id="copy-query" type="button" hidden>Copy query link</button>
+    </div>
+
+    <section id="result" aria-busy="false" aria-label="Exit Lens result">
+      <div class="empty-state">
+        <p class="eyebrow">Waiting for a query</p>
+        <h2>Your amount-specific exit view appears here.</h2>
+        <p>Run the lens to compare spot-marked value, quoted WETH output, realization gap, and the exact block evidence behind them.</p>
+      </div>
+    </section>
+
+    <section class="method" aria-labelledby="method-title">
+      <div>
+        <p class="eyebrow">How to read it</p>
+        <h2 id="method-title">Three numbers. One observation context.</h2>
+      </div>
+      <ol>
+        <li>
+          <span>Spot-Marked Value</span>
+          <p>The amount valued at the pool’s marginal price.</p>
+        </li>
+        <li>
+          <span>Exit Quote</span>
+          <p>The canonical quote surface’s amount-specific WETH output.</p>
+        </li>
+        <li>
+          <span>Realization Gap</span>
+          <p>The difference between paper value and quoted realization.</p>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <p><strong>Pons Lens by ZOOMIES</strong> is independent software, not affiliated with Pons Labs or Robinhood.</p>
+    <p>Results are read-only observations, not execution promises. Not financial advice. Opening a shared query requests fresh chain data.</p>
+  </footer>
+
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>
